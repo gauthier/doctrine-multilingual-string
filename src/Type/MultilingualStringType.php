@@ -8,7 +8,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\JsonType;
 use Gauthier\MultilingualString\MultilingualString;
 
-class MutlilingualStringType extends JsonType
+class MultilingualStringType extends JsonType
 {
 
     public function getName()
