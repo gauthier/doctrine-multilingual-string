@@ -1,5 +1,5 @@
 {
-  "name": "gauthier/mdoctrine-multilingual-string",
+  "name": "gauthier/doctrine-multilingual-string",
   "type": "plugin",
   "require-dev": {
     "codeception/codeception": "^3.0"
