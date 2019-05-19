@@ -133,7 +133,7 @@ class MultilingualString
     public static function validateLanguage(string $language)
     {
         if (!in_array($language, self::$availableLanguages)) {
-            throw new MultilingualStringException(sprintf('Cannot set "%s" as default language because this is not one of declared available languages (%s)',
+            throw new MultilingualStringException(sprintf('Language "%s" is not one of declared available languages (%s)',
                 $language, implode(', ', self::$availableLanguages)));
         }
 
@@ -182,22 +182,25 @@ class MultilingualString
      * @param null $lang
      * @throws MultilingualStringException
      */
-    public function getValue($lang = null)
+    public function getValue($language = null)
     {
 
-        if (is_null($lang)) {
-            $lang = self::getDefaultLanguage();
+
+        if (is_null($language)) {
+            $language = self::getDefaultLanguage();
         }
 
-        if (empty($this->translations[$lang])) {
-            $didTryFallbackLanguage = ($lang == self::getFallbackLanguage());
+        self::validateLanguage($language);
+
+        if (empty($this->translations[$language])) {
+            $didTryFallbackLanguage = ($language == self::getFallbackLanguage());
             // try translation routes
-            while ($lang = self::getRoutedLanguage($lang)) {
-                if (!empty($this->translations[$lang])) {
-                    return $this->translations[$lang];
+            while ($language = self::getRoutedLanguage($language)) {
+                if (!empty($this->translations[$language])) {
+                    return $this->translations[$language];
                 }
                 if (!$didTryFallbackLanguage) {
-                    $didTryFallbackLanguage = ($lang == self::getFallbackLanguage());
+                    $didTryFallbackLanguage = ($language == self::getFallbackLanguage());
                 }
             }
 
@@ -211,9 +214,16 @@ class MultilingualString
             return null;
         }
 
-        return $this->translations[$lang];
+        return $this->translations[$language];
 
 
     }
+
+    public function __toString()
+    {
+        return $this->getValue();
+    }
+
+
 }
 
