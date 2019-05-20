@@ -141,6 +141,7 @@ class MultilingualString
 
     /**
      * @param array $translations
+     * @throws MultilingualStringException
      */
     public function hydrate(array $translations)
     {
@@ -148,7 +149,20 @@ class MultilingualString
         array_walk($defaultValues, function (&$value) {
             $value = '';
         });
-        $this->translations = $translations + $defaultValues;
+        foreach($translations + $defaultValues as $lang => $translation) {
+            $this->addTranslation($lang, $translation);
+        }
+    }
+
+    /**
+     * @param $lang
+     * @param $translation
+     * @throws MultilingualStringException
+     */
+    public function addTranslation($lang, $translation)
+    {
+        self::validateLanguage($lang);
+        $this->translations[$lang] = $translation;
     }
 
     /**
