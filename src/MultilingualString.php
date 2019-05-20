@@ -66,11 +66,22 @@ class MultilingualString
         }
     }
 
+    /**
+     * @param string $from
+     * @param string $to
+     * @throws MultilingualStringException
+     */
     public static function setRoute(string $from, string $to)
     {
+        self::validateLanguage($from);
+        self::validateLanguage($to);
         self::$routes[$from] = $to;
     }
 
+    /**
+     * @param string $language
+     * @throws MultilingualStringException
+     */
     public static function setFallbackLanguage(string $language)
     {
         self::validateLanguage($language);
@@ -78,18 +89,6 @@ class MultilingualString
         self::$fallbackLanguage = $language;
     }
 
-    /**
-     * @return mixed
-     * @throws MultilingualStringException
-     */
-    protected static function getCurrentLanguage()
-    {
-        if(empty(self::$currentLanguage)) {
-            self::$currentLanguage = self::getDefaultLanguage();
-        }
-
-        return self::$currentLanguage;
-    }
 
     /**
      * @param $lang
@@ -219,6 +218,34 @@ class MultilingualString
 
     }
 
+    /**
+     * @return array
+     */
+    public static function getAvailableLanguages(): array
+    {
+        return self::$availableLanguages;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRoutes(): array
+    {
+        return self::$routes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTranslations(): array
+    {
+        return $this->translations;
+    }
+
+    /**
+     * @return string
+     * @throws MultilingualStringException
+     */
     public function __toString()
     {
         return $this->getValue();
