@@ -10,13 +10,8 @@
       "email": "gdelamarre@gmail.com"
     }
   ],
-  "autoload": {
-    "psr-4": {
-      "Gauthier\\MultilingualString\\": "src/"
-    }
-  },
   "require": {
-    "doctrine/dbal": "^2.9",
+    "doctrine/dbal": "^3",
     "ext-json": "*"
   }
 }
