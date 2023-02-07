@@ -2,7 +2,8 @@
   "name": "gauthier/doctrine-multilingual-string",
   "type": "plugin",
   "require-dev": {
-    "codeception/codeception": "^3.0"
+    "codeception/codeception": "^4.0",
+    "codeception/module-asserts": "^2.0"
   },
   "authors": [
     {
@@ -10,6 +11,11 @@
       "email": "gdelamarre@gmail.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "Gauthier\\MultilingualString\\": "src/"
+    }
+  },
   "require": {
     "doctrine/dbal": "^3",
     "ext-json": "*"
