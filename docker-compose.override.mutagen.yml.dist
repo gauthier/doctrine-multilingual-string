@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  database:
+    ports:
+      - '3367:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: passroot
+
+  php_server:
+    ports:
+      - '8005:80'
+    volumes:
+      - app:/srv/app
+
+volumes:
+  app:
+
+x-mutagen:
+  sync:
+    defaults:
+
+    src:
+      mode: 'two-way-resolved'
+      alpha: '.'
+      beta: 'volume://app'
+      configurationBeta:
+        permissions:
+          defaultFileMode: 0o644
+          defaultDirectoryMode: 0o755
+          defaultOwner: 'id:33' # www-data
+          defaultGroup: 'id:33' # www-data
+      ignore:
+        vcs: true
+        paths:
+          - 'docker'
+          - 'vendor'
+          - 'var'
+
+    vendor:
+      mode: 'one-way-replica'
+      alpha: 'volume://app/vendor'
+      beta: './vendor'

@@ -39,8 +39,8 @@ class MultilingualStringTest extends Unit
         $this->tester->assertEquals('es ist Deutsch', $string->getValue('nl'));
 
         // test default language explicit setting
-        MultilingualString::setDefaultLanguage('en');
-        $this->tester->assertEquals('this is english', $string->getValue());
+        MultilingualString::setDefaultLanguage('fr');
+        $this->tester->assertEquals('ceci est du français', $string->getValue());
 
     }
 }

@@ -1,2 +1,4 @@
 vendor/
 .idea
+/docker/data/
+/docker-compose.override.yml

@@ -11,7 +11,7 @@ use Gauthier\MultilingualString\MultilingualString;
 class MultilingualStringType extends JsonType
 {
 
-    public function getName()
+    public function getName() : string
     {
         return 'multilingual';
     }
@@ -29,7 +29,7 @@ class MultilingualStringType extends JsonType
         return parent::convertToDatabaseValue($translations, $platform);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
     {
 
         $value = new MultilingualString(json_decode($value, true));
