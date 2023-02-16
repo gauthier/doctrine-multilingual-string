@@ -262,7 +262,7 @@ class MultilingualString
      */
     public function __toString()
     {
-        return $this->getValue();
+        return $this->getValue() ?? '';
     }
 
 
