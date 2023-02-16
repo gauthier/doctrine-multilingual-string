@@ -39,9 +39,9 @@ class MultilingualString
      * MultilingualString constructor.
      * @param array $value
      */
-    public function __construct(array $translations = [])
+    public function __construct(?array $translations = [])
     {
-        $this->hydrate($translations);
+        $this->hydrate($translations ?? []);
     }
 
 
